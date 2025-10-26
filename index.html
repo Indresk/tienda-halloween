@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Compra todo lo que puedas necesitar para halloween en un solo lugar.">
+    <title>Halline Store | Tienda de halloween</title>
+    <link rel="shortcut icon" href="./assets/img/logo-calabaza-isolated.webp" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
-    
     <script defer src="./js/data.js"></script>
     <script defer src="./js/carrito-logica.js"></script>
     <script defer src="./js/carrito-offcanvas.js"></script>
 </head>
 <body>
     <header>
-        <nav class="flex jc-c ai-c pt-1 pb-2">
+        <nav class="flex jc-c ai-c py-1">
             <ul class="col-1 col-md-3 flex jc-c ai-c g-2">
                 <li><a href="">Tienda</a></li>
                 <li><a href="">Historia</a></li>
                 <li><a href="">Perfil</a></li>
             </ul>
-            <a href=""><img class="icon" src="https://www.pngplay.com/wp-content/uploads/13/Symbol-Logo-Transparent-Image.png" alt=""></a>
+            <a href=""><img class="icon" src="./assets/img/logo-type.webp" alt=""></a>
             <ul class="col-1 col-md-3 flex jc-c ai-c g-2">
                 <li><a href="">Nosotros</a></li>
                 <li><a href="">Lanzamientos</a></li>
@@ -27,20 +28,23 @@
         </nav>
     </header>
     <main>
+        <button id="cartButtonOnPage" data-state="close" class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M12.5 17h-6.5v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /><path d="M16 22l5 -5" /><path d="M21 21.5v-4.5h-4.5" /></svg>
+        </button>
         <div id="main-grid">
             <div id="main-content">
                 <section class="section-margin">
                     <div id="home-hero" class="flex py-4">
                         <div class="col-p80 pr-2 flex ai-c">
                             <div>
-                                <h1>Gran titulo</h1>
+                                <h1>GRAN CALABAZA SHOP</h1>
                                 <p>Conoce todos los productos que tenemos para ti, en un solo lugar y disponibles a un clic, no dudes, registrate tambien a nuestro news letter para tener la ultima información siempre a la mano.</p>
                             </div>
                         </div>
                         <div class="col-5">
-                            <button id="cartButtonOnPage" data-state="close">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M12.5 17h-6.5v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /><path d="M16 22l5 -5" /><path d="M21 21.5v-4.5h-4.5" /></svg>
-                            </button>
+                            <picture>
+                                <img src="./assets/img/logo-inline.webp" alt="">
+                            </picture>
                         </div>
                     </div>
                 </section>
@@ -61,13 +65,9 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
                         </button>
                     </div>
+                    <button id="uparrow" class="inactive"></button>
+                    <button id="downarrow" class="inactive"></button>
                     <div id="carrito-cards-container" class="col-1 flex g-2 fd-c fnw p-1">
-                        <div class="card p-2">
-                            <img class="mb-1" src="https://plus.unsplash.com/premium_photo-1676299910876-747eeb0c11dc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3VhZHJhZG98ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000" alt="">
-                            <h4>Registrate ahora</h4>
-                            <p class="mb-1">Precio:</p>
-                            <button class="flex ai-c"><p class="col-p80">Eliminar</p><svg class="col-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg></button>
-                        </div>
                     </div>
                 </div>
             </aside>
@@ -89,6 +89,5 @@
             <h2>Lorem ipsum dolor sit</h2>
         </div>
     </footer>
-    
 </body>
 </html>

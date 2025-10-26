@@ -15,4 +15,10 @@ html{
 
 body{
     font-family: "Peralta", serif;
+    background-image: url("../assets/img/background.webp");
+    background-color: $background-color;
+    background-blend-mode: multiply;
+    background-repeat: repeat-y;
+    background-size: cover;
+    background-position: center none;
 }

@@ -5,6 +5,17 @@
 header{
     border-bottom: $border-color solid 2px;
 }
+nav{
+    position: relative;
+    &::after{
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: $accent-color;
+        opacity: 0.3;
+        z-index: -1;
+    }
+}
 nav li{
     list-style: none;
 }
@@ -60,9 +71,37 @@ nav li a{
 #carrito-cards-container{
     max-height: 80vh;
     border-radius: 10px;
-    box-shadow: inset 0px 1px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0px 1px 10px rgba($text-color, 0.3);
     overflow-y: auto;
+    scrollbar-width: none;
     > .card{
         min-height: fit-content;
     }
+}
+#uparrow,#downarrow{
+    content: '';
+    position:absolute;
+    left: -2px;
+    top:12vh;
+    width: 20px;
+    height: 50px;
+    background-color: $text-color;
+    clip-path: path("M 10 0 L 20 20 L 13 20 L 13 50 L 7 50 L 7 20 L 0 20 Z");
+    &.inactive{
+        opacity: 0.2;
+    }
+    &:hover{
+        background-color: $accent-color;
+    }
+}
+#downarrow{
+    clip-path: path("M 10 50 L 20 30 L 13 30 L 13 0 L 7 0 L 7 30 L 0 30 Z");
+    top: 80vh;
+}
+
+#cartButtonOnPage{
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 100;
 }

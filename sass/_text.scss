@@ -1,9 +1,17 @@
 @use "variables" as *;
 
-h1,h2,h3,h4,h5,h6,p,li,a,label,legend{
+h1,h2,h3,h4,h5,h6{
+    color: $accent-color;
+}
+p,li,a,label,legend{
     color: $text-color;
+    font-size: 14px;
 }
 
 .tinvert{
     color: $inverted-text-color;
+}
+
+.taccent{
+    color: $accent-color;
 }
