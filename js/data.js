@@ -8,8 +8,33 @@ class Producto{
     }
 }
 
+class ProdCarrito{
+    constructor(id,nombre,asset,precio,cantidad=1){
+        this.id = id;
+        this.nombre = nombre;
+        this.asset = asset;
+        this.precioBase = precio;
+        this.precio = this.precioBase;
+        this.cantidad = cantidad;
+    }
+
+    aumentarCantidad(){
+        this.cantidad += 1;
+        this.ajustePrecioCantidad();
+    }
+
+    reducirCantidad(){
+        this.cantidad -= 1;
+        this.ajustePrecioCantidad();
+    }
+
+    ajustePrecioCantidad(){
+        this.precio = this.precioBase * this.cantidad;
+    }
+}
+
 let productosRecuperados = JSON.parse(sessionStorage.getItem("productos"));
-const carritoRecuperado = JSON.parse(sessionStorage.getItem("carrito")) || [];
+const carritoRecuperado = JSON.parse(localStorage.getItem("carrito")) || [];
 
 if (productosRecuperados == null){
     productosRecuperados = [
@@ -37,4 +62,4 @@ if (productosRecuperados == null){
 }
 
 const productos = productosRecuperados.map(p => new Producto(p.id ,p.nombre, p.asset, p.precio, p.excerpt));
-const carrito = carritoRecuperado.map(p => new Producto(p.id ,p.nombre, p.asset, p.precio, p.excerpt));
+const carrito = carritoRecuperado.map(p => new ProdCarrito(p.id ,p.nombre, p.asset, p.precio,p.cantidad));

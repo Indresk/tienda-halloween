@@ -1,13 +1,16 @@
-// function busqueda(buscando,array){
-//     return array.find((jugador) => jugador.nombre.toLowerCase() === buscando)
-// }
-
 const boardProductos = document.querySelector('#cards-container');
+const boardCarrito = document.querySelector('#carrito-cards-container');
+
+function busqueda(buscando,array){
+    // console.log(buscando);
+    return array.find((producto) => producto.id === parseInt(buscando));
+}
 
 const cargarProductos = () => {
+    boardProductos.innerHTML = '';
     productos.forEach(producto => {
         let productCard = document.createElement("div");
-        productCard.className = "card col-5 p-2 flex fnw fd-c jc-b";
+        productCard.className = "card p-2 flex fnw fd-c jc-b";
         productCard.innerHTML = `
         <div>
         <img class="mb-1" src="${producto.asset}" alt="">
@@ -15,10 +18,79 @@ const cargarProductos = () => {
         <p>Precio: $${producto.precio}</p>
         <p class="mb-1">Descripción: ${producto.excerpt}</p>
         </div>
-        <button class="cart-add">Añadir al carrito</button class="cart-add">
+        <button class="cart-add" data-id="${producto.id}">Añadir al carrito</button>
         `;
         boardProductos.appendChild(productCard);
     });
 }
+const cargarCarrito = () => {
+    boardCarrito.innerHTML = '';
+    carrito.forEach(producto => {
+        if(producto.cantidad>0){
+            let productCard = document.createElement("div");
+            productCard.className = "card p-2";
+            productCard.innerHTML = `
+            <img class="mb-1" src="${producto.asset}" alt="">
+            <h4>${producto.nombre}</h4>
+            <p class="mb-1">Precio: $${producto.precio}</p>
+            <div class="flex ai-c mb-1">
+                <button class="col-3" data-substractQ="${producto.id}">-</button>
+                <div class="col-3 flex ai-c jc-c"><p>${producto.cantidad}</p></div>
+                <button class="col-3" data-addQ="${producto.id}">+</button>            
+            </div>
+            <button class="flex ai-c" data-id="${producto.id}">
+                <p class="col-p80">Eliminar</p>
+                <svg class="col-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+            </button>
+            `;
+            boardCarrito.appendChild(productCard);
+        }
+        else{
+            carrito.splice(carrito.indexOf(busqueda(producto.id,carrito)),1);
+        }
+    });
+    localStorage.setItem("carrito",JSON.stringify(carrito));
+}
 
 cargarProductos();
+cargarCarrito();
+
+boardCarrito.addEventListener('click', (e)=>{
+    const deleteButton = e.target.closest('[data-id]')
+    const addButton = e.target.closest('[data-addQ]')
+    const substractButton = e.target.closest('[data-substractQ]')
+    if(deleteButton){
+        let id = deleteButton.getAttribute('data-id');
+        let index = carrito.indexOf(busqueda(id,carrito));
+        carrito.splice(index,1);
+        cargarCarrito();
+    }
+    if(addButton){
+        let id = addButton.getAttribute('data-addQ');
+        const existente = busqueda(id, carrito);
+        existente.aumentarCantidad();
+        cargarCarrito();
+    }
+    if(substractButton){
+        let id = substractButton.getAttribute('data-substractQ');
+        const existente = busqueda(id, carrito);
+        existente.reducirCantidad();
+        cargarCarrito();
+    }
+}
+);
+boardProductos.addEventListener('click', (e)=>{
+    if(e.target.closest('[data-id]')){
+        let id = e.target.getAttribute('data-id');
+        let CItemF = busqueda(id,productos)
+        const existente = busqueda(id, carrito);
+        if (!existente) {
+            carrito.push(new ProdCarrito(CItemF.id,CItemF.nombre,CItemF.asset,CItemF.precio));
+        }
+        else{
+            existente.aumentarCantidad();
+        }
+        cargarCarrito();
+    }
+}
+);
