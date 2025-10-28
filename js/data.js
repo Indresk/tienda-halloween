@@ -70,7 +70,7 @@ let buscadorRecuperado = JSON.parse(localStorage.getItem("buscador")) || '';
 const productos = productosDB.map(p => new Producto(p.id ,p.nombre, p.asset, p.precio, p.excerpt));
 const carrito = carritoRecuperado.map(p => new ProdCarrito(p.id ,p.nombre, p.asset, p.precio,p.cantidad));
 
-// Declaración de variables de contenedores principales
+// Declaración de variables de contenedores dinamicos principales
 
 const boardProductos = document.querySelector('#cards-container');
 const boardCarrito = document.querySelector('#carrito-cards-container');

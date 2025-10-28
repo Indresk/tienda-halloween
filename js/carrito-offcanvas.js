@@ -99,24 +99,13 @@ function closeCart(){
     cartButtonOnPage.dataset.state = 'close';
 }
 
-boardProductos.addEventListener('click',(e) =>{
-    const cartAddBtn = e.target.closest('[data-id]');
-    cartAddBtn && openCart();
-}
-)
-
 closeInCart.addEventListener('click',()=>{
     closeCart()
 ;})
 
 cartButtonOnPage.addEventListener('click',()=>{
     const btnState = cartButtonOnPage.getAttribute('data-state');
-    if(btnState == "open"){
-        closeCart();
+    btnState == "open"? closeCart():openCart();
     }
-    else{
-        openCart();
-    }
-}
 );
 

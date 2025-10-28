@@ -14,7 +14,7 @@ const eliminarDeCarrito = (id)=>{
     carrito.splice(carrito.indexOf(busqueda(id,carrito)),1);
 }
 
-// Actualización del dom
+// loop principal de carga de productos en DOM
 
 const cargarProductos = () => {
     boardProductos.innerHTML = '';
@@ -85,8 +85,6 @@ inputBuscador.addEventListener('input',(e)=>{
     },1000);
 });
 
-
-
 // Detectar eventos en botones de Carrito o productos
 
 boardCarrito.addEventListener('click', (e)=>{
@@ -125,6 +123,7 @@ boardProductos.addEventListener('click', (e)=>{
             existente.aumentarCantidad();
         }
         cargarCarrito();
+        openCart();
     }
 }
 );
