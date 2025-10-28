@@ -8,14 +8,14 @@
     <link rel="shortcut icon" href="./assets/img/logo-calabaza-isolated.webp" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
     <script defer src="./js/data.js"></script>
-    <script defer src="./js/carrito-logica.js"></script>
     <script defer src="./js/carrito-offcanvas.js"></script>
+    <script defer src="./js/carrito-logica.js"></script>
 </head>
 <body>
     <header>
         <nav class="flex jc-c ai-c py-1">
             <ul class="col-1 col-md-3 flex jc-c ai-c g-2">
-                <li><a href="">Tienda</a></li>
+                <li><a href="" class="taccent">Tienda</a></li>
                 <li><a href="">Historia</a></li>
                 <li><a href="">Perfil</a></li>
             </ul>
@@ -30,18 +30,19 @@
     <main>
         <button id="cartButtonOnPage" data-state="close" class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M12.5 17h-6.5v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /><path d="M16 22l5 -5" /><path d="M21 21.5v-4.5h-4.5" /></svg>
+            <div id="total"></div>
         </button>
         <div id="main-grid">
             <div id="main-content">
                 <section class="section-margin">
-                    <div id="home-hero" class="flex py-4">
-                        <div class="col-p80 pr-2 flex ai-c">
+                    <div id="home-hero" class="flex py-4 jc-c">
+                        <div class="col-1 col-lg-p80 pr-2 flex ai-c">
                             <div>
                                 <h1>GRAN CALABAZA SHOP</h1>
                                 <p>Conoce todos los productos que tenemos para ti, en un solo lugar y disponibles a un clic, no dudes, registrate tambien a nuestro news letter para tener la ultima información siempre a la mano.</p>
                             </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-2 col-lg-5">
                             <picture>
                                 <img src="./assets/img/logo-inline.webp" alt="">
                             </picture>
@@ -49,11 +50,11 @@
                     </div>
                 </section>
                 <section class="section-margin flex mb-4">
-                    <aside class="col-5 pr-2">
+                    <aside class="col-1 mb-1 mb-lg-0 col-lg-5 pr-lg-2">
                         <h3>Busca</h3>
                         <input id="buscador" type="text">
                     </aside>
-                    <div id="cards-container" class="col-p80 flex g-2">
+                    <div id="cards-container" class="col-1 col-lg-p80 flex g-2">
                     </div>
                 </section>
             </div>
@@ -65,28 +66,28 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
                         </button>
                     </div>
-                    <button id="uparrow" class="inactive"></button>
-                    <button id="downarrow" class="inactive"></button>
-                    <div id="carrito-cards-container" class="col-1 flex g-2 fd-c fnw p-1">
+                    <div class="flex jc-c">
+                        <button id="uparrow" class="inactive"></button>
+                        <button id="downarrow" class="inactive"></button>
+                        <div id="carrito-cards-container" class="col-1 flex g-2 fd-c fnw p-1"></div>
                     </div>
                 </div>
             </aside>
         </div>
     </main>
     <footer class="flex jc-c ai-c g-2 py-2">
-        <div class="col-2">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus deleniti</p>
+        <div class="col-1 col-lg-2">
+            <p>Con tu compra donas un 10% a una fundación para el cuidado de los gatos negros abandonados.</p>
         </div>
-        <div class="col-5">
+        <div class="col-1 col-lg-5">
             <ul>
-                <li>Lorem ipsum dolor</li>
-                <li>sit amet consectetur</li>
-                <li>pariatur nisi quas cumqu</li>
-                <li>reiciendis provident minus</li>
+                <li class="taccent">Tienda</li>
+                <li>Historia</li>
+                <li>Lanzamientos</li>
             </ul>
         </div>
-        <div class="col-5">
-            <h2>Lorem ipsum dolor sit</h2>
+        <div class="col-1 col-lg-5">
+            <h2>Halline</h2>
         </div>
     </footer>
 </body>

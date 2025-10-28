@@ -1,58 +1,29 @@
+// Declarar variables
+    // variables de apertura y cierre del carrito
 const cartButtonOnPage = document.querySelector('#cartButtonOnPage');
 const closeInCart = document.querySelector('#close-cart');
 const mainGrid = document.querySelector("#main-grid");
 const cartContainer = document.querySelector('#carrito-container');
-
-function openCart(){
-    mainGrid.classList.add("expanded");
-    cartContainer.classList.remove("ocultar");
-    cartButtonOnPage.dataset.state = 'open';
-    scrollApparenceUp();
-    scrollApparenceDown();
-}
-
-function closeCart(){
-    mainGrid.classList.remove("expanded")
-    setTimeout(()=>{cartContainer.classList.add("ocultar")},400);
-    cartButtonOnPage.dataset.state = 'close';
-}
-
-boardProductos.addEventListener('click',(e) =>{
-    const cartAddBtn = e.target.closest('[data-id]');
-    cartAddBtn && openCart();
-}
-)
-
-closeInCart.addEventListener('click',()=>{
-    closeCart();
-    ;})
-    cartButtonOnPage.addEventListener('click',()=>{
-        const btnState = cartButtonOnPage.getAttribute('data-state');
-        if(btnState == "open"){
-            closeCart();
-        }
-        else{
-            openCart();
-        }
-    }
-);
-
-// Control de Scroll
-
+    // asginación de flechas de scroll
 const scrollUp = document.querySelector('#uparrow')
 const scrollDown = document.querySelector('#downarrow')
-
+    // velocidad de scrolleo por flechas y estado de scroll
 let isScrolling = false;
 let scrollSpeed = 7;
 
-const scrollApparenceUp = ()=>{
+// Control de Scroll
+
+    // cambio de apariencia
+const scrollApparenceCheckerUp = ()=>{
     if (boardCarrito.scrollTop === 0) {
         scrollUp.classList.add('inactive');
-    } else {
+    } 
+    else {
         scrollUp.classList.remove('inactive');
     }
 }
-const scrollApparenceDown = ()=>{
+
+const scrollApparenceCheckerDown = () =>{
     if(Math.abs(boardCarrito.scrollHeight - boardCarrito.clientHeight - boardCarrito.scrollTop)<=1){
         scrollDown.classList.add('inactive')
     }
@@ -61,19 +32,15 @@ const scrollApparenceDown = ()=>{
     }
 }
 
-boardCarrito.addEventListener('scroll', () => {
-    scrollApparenceUp();
-    scrollApparenceDown();
-});
-
+    // movimiento
 function ScrollUp() {
     if (!isScrolling) return;
     boardCarrito.scrollBy({
         top: -scrollSpeed,
         behavior: 'auto'
     });
-    scrollApparenceUp();
-    scrollApparenceDown();
+    scrollApparenceCheckerUp();
+    scrollApparenceCheckerDown();
     requestAnimationFrame(ScrollUp);
 }
 
@@ -83,11 +50,12 @@ function ScrollDown() {
         top: +scrollSpeed,
         behavior: 'auto'
     });
-    scrollApparenceUp();
-    scrollApparenceDown();
+    scrollApparenceCheckerUp();
+    scrollApparenceCheckerDown();
     requestAnimationFrame(ScrollDown);
 }
 
+    // estado del scroll
 scrollUp.addEventListener('mousedown', () => {
     isScrolling = true;
     requestAnimationFrame(ScrollUp);
@@ -109,3 +77,46 @@ scrollDown.addEventListener('mouseup', () => {
 scrollDown.addEventListener('mouseleave', () => {
     isScrolling = false;
 });
+
+boardCarrito.addEventListener('scroll', () => {
+    scrollApparenceCheckerUp();
+    scrollApparenceCheckerDown();
+});
+
+// Control de apariencia del carrito
+
+function openCart(){
+    mainGrid.classList.add("expanded");
+    cartContainer.classList.remove("ocultar");
+    cartButtonOnPage.dataset.state = 'open';
+    scrollApparenceCheckerUp();
+    scrollApparenceCheckerDown();
+}
+
+function closeCart(){
+    mainGrid.classList.remove("expanded")
+    setTimeout(()=>{cartContainer.classList.add("ocultar")},400);
+    cartButtonOnPage.dataset.state = 'close';
+}
+
+boardProductos.addEventListener('click',(e) =>{
+    const cartAddBtn = e.target.closest('[data-id]');
+    cartAddBtn && openCart();
+}
+)
+
+closeInCart.addEventListener('click',()=>{
+    closeCart()
+;})
+
+cartButtonOnPage.addEventListener('click',()=>{
+    const btnState = cartButtonOnPage.getAttribute('data-state');
+    if(btnState == "open"){
+        closeCart();
+    }
+    else{
+        openCart();
+    }
+}
+);
+

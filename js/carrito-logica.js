@@ -1,8 +1,12 @@
-const boardProductos = document.querySelector('#cards-container');
-const boardCarrito = document.querySelector('#carrito-cards-container');
+// Declaración de variables
+
+const inputBuscador = document.querySelector('#buscador');
+inputBuscador.value = `${buscadorRecuperado}`;
+const productosVisibles = [];
+
+// Funciones de uso general
 
 function busqueda(buscando,array){
-    // console.log(buscando);
     return array.find((producto) => producto.id === parseInt(buscando));
 }
 
@@ -10,23 +14,26 @@ const eliminarDeCarrito = (id)=>{
     carrito.splice(carrito.indexOf(busqueda(id,carrito)),1);
 }
 
+// Actualización del dom
+
 const cargarProductos = () => {
     boardProductos.innerHTML = '';
-    productos.forEach(producto => {
+    productosVisibles.forEach(producto => {
         let productCard = document.createElement("div");
         productCard.className = "card p-2 flex fnw fd-c jc-b";
         productCard.innerHTML = `
         <div>
         <img class="mb-1" src="${producto.asset}" alt="">
         <h4 class="mb-1">${producto.nombre}</h4>
-        <p>Precio: $${producto.precio}</p>
-        <p class="mb-1">Descripción: ${producto.excerpt}</p>
+        <p><span class="taccent">Precio:</span> $${producto.precio}</p>
+        <p class="mb-1"><span class="taccent">Descripción:</span> ${producto.excerpt}</p>
         </div>
         <button class="cart-add" data-id="${producto.id}">Añadir al carrito</button>
         `;
         boardProductos.appendChild(productCard);
     });
 }
+
 const cargarCarrito = () => {
     boardCarrito.innerHTML = '';
     carrito.filter(v=>v.cantidad <= 0).forEach((i)=>{eliminarDeCarrito(i.id)});
@@ -36,7 +43,7 @@ const cargarCarrito = () => {
         productCard.innerHTML = `
         <img class="mb-1" src="${producto.asset}" alt="">
         <h4>${producto.nombre}</h4>
-        <p class="mb-1">Precio: $${producto.precio}</p>
+        <p class="mb-1"><span class="taccent">Precio:</span> $${producto.precio}</p>
         <div class="flex ai-c mb-1">
             <button class="col-3" data-substractQ="${producto.id}">-</button>
             <div class="col-3 flex ai-c jc-c"><p>${producto.cantidad}</p></div>
@@ -49,11 +56,38 @@ const cargarCarrito = () => {
         `;
         boardCarrito.appendChild(productCard);
     });
+    scrollApparenceCheckerUp();
+    scrollApparenceCheckerDown();
     localStorage.setItem("carrito",JSON.stringify(carrito));
+    document.querySelector('#total').innerText = `$${carrito.reduce((c,p)=>c = c+p.precio,0).toFixed(1)}`;
 }
 
-cargarProductos();
-cargarCarrito();
+//   Filtro de texto de productos
+
+const busquedaProds = (input)=>{
+    if(input != undefined && input != null && input.trim() != ''){
+        productosVisibles.splice(0,productosVisibles.length);
+        productosVisibles.push(...productos.filter((e) => e.nombre.toLowerCase().includes(input.trim().toLowerCase())))
+    }
+    else{
+        productosVisibles.splice(0,productosVisibles.length);
+        productosVisibles.push(...productos)
+    }
+    cargarProductos();
+}
+
+inputBuscador.addEventListener('input',(e)=>{
+    let timer;
+    clearTimeout(timer);
+    timer = setTimeout(()=>{
+        busquedaProds(e.target.value);
+        localStorage.setItem("buscador",JSON.stringify(e.target.value.trim()))
+    },1000);
+});
+
+
+
+// Detectar eventos en botones de Carrito o productos
 
 boardCarrito.addEventListener('click', (e)=>{
     const deleteButton = e.target.closest('[data-id]')
@@ -78,6 +112,7 @@ boardCarrito.addEventListener('click', (e)=>{
     }
 }
 );
+
 boardProductos.addEventListener('click', (e)=>{
     if(e.target.closest('[data-id]')){
         let id = e.target.getAttribute('data-id');
@@ -93,3 +128,9 @@ boardProductos.addEventListener('click', (e)=>{
     }
 }
 );
+
+// Cargar DOM
+
+busquedaProds(buscadorRecuperado);
+cargarProductos();
+cargarCarrito();
