@@ -38,6 +38,7 @@ const cargarCarrito = () => {
     boardCarrito.innerHTML = '';
     carrito.filter(v=>v.cantidad <= 0).forEach((i)=>{eliminarDeCarrito(i.id)});
     carrito.forEach(producto => {
+        producto.ajustePrecioCantidad();
         let productCard = document.createElement("div");
         productCard.className = "card p-2";
         productCard.innerHTML = `

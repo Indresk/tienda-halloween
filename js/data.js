@@ -68,7 +68,7 @@ let buscadorRecuperado = JSON.parse(localStorage.getItem("buscador")) || '';
 // Asignación a variables de data a clases
 
 const productos = productosDB.map(p => new Producto(p.id ,p.nombre, p.asset, p.precio, p.excerpt));
-const carrito = carritoRecuperado.map(p => new ProdCarrito(p.id ,p.nombre, p.asset, p.precio,p.cantidad));
+const carrito = carritoRecuperado.map(p => new ProdCarrito(p.id ,p.nombre, p.asset, p.precioBase,p.cantidad));
 
 // Declaración de variables de contenedores dinamicos principales
 
